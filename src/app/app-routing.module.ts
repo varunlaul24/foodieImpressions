@@ -4,9 +4,11 @@ import { ChefListComponent } from './components/chef-list/chef-list.component';
 import { ChefProfileComponent } from './components/chef-profile/chef-profile.component';
 
 const routes: Routes = [
+  { path: 'home', component: ChefListComponent },
   { path: 'chefs', component: ChefListComponent },
   { path: 'chefs/:id', component: ChefProfileComponent },
-  { path: '', redirectTo: 'chefs', pathMatch: 'full' }
+  { path: '', redirectTo: 'chefs', pathMatch: 'full' },
+  { path: '**', redirectTo: 'chefs', pathMatch: 'full' }
 ];
 
 @NgModule({

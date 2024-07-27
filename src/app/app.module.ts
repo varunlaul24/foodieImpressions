@@ -7,12 +7,14 @@ import { HttpClientModule } from '@angular/common/http';
 import { ChefListComponent } from './components/chef-list/chef-list.component';
 import { HeaderComponent } from './shared/header/header.component';
 import { ChefProfileComponent } from './components/chef-profile/chef-profile.component';
+import { HomeComponent } from './components/home/home.component';
 @NgModule({
   declarations: [
     AppComponent,
     ChefListComponent,
     HeaderComponent,
-    ChefProfileComponent
+    ChefProfileComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,

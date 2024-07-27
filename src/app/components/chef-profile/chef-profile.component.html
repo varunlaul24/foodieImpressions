@@ -1,18 +1,11 @@
 <div *ngIf="chef">
   <h2>{{ chef.name }}</h2>
-  <img
-    [src]="chef.avatar"
-    alt="{{ chef.name }}'s avatar"
-    class="h-72 w-72 rounded-xl"
-  />
+  <img [src]="chef.avatar" alt="{{ chef.name }}'s avatar" class="h-72 w-72 rounded-xl" />
+  
   <h3>Customer Reviews</h3>
   <div *ngIf="chef.reviews?.length">
     <div *ngFor="let review of chef.reviews" class="review">
-      <p>
-        <strong>{{ review.author }}</strong> ({{
-          review.date | date : "short"
-        }})
-      </p>
+      <p><strong>{{ review.author }}</strong> ({{ review.date | date:'short' }})</p>
       <p>{{ review.content }}</p>
     </div>
   </div>
@@ -22,9 +15,10 @@
 
   <h4>Add a Review</h4>
   <input type="text" [(ngModel)]="newReview.author" placeholder="Your name" />
-  <textarea
-    [(ngModel)]="newReview.content"
-    placeholder="Your review"
-  ></textarea>
+  <textarea [(ngModel)]="newReview.content" placeholder="Your review"></textarea>
   <button (click)="addReview()">Submit</button>
+
+  <h3>Review Summary</h3>
+  <p *ngIf="summary">{{ summary }}</p>
+  <p *ngIf="!summary">No summary available.</p>
 </div>
