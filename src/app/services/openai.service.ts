@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 
 const environment = {
   azureOpenAiEndpoint: 'reviews-summarizer',
-  azureOpenAiApiKey: '3b0fef1359824f6b976a24b8f9ae423b'
+  azureOpenAiApiKey: ''
 };
 
 @Injectable({

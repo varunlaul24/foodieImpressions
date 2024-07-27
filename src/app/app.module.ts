@@ -4,9 +4,15 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { ChefListComponent } from './components/chef-list/chef-list.component';
+import { HeaderComponent } from './shared/header/header.component';
+import { ChefProfileComponent } from './components/chef-profile/chef-profile.component';
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    ChefListComponent,
+    HeaderComponent,
+    ChefProfileComponent
   ],
   imports: [
     BrowserModule,
