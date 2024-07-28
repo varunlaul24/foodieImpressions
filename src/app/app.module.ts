@@ -8,13 +8,15 @@ import { ChefListComponent } from './components/chef-list/chef-list.component';
 import { HeaderComponent } from './shared/header/header.component';
 import { ChefProfileComponent } from './components/chef-profile/chef-profile.component';
 import { HomeComponent } from './components/home/home.component';
+import { FooterComponent } from './shared/footer/footer.component';
 @NgModule({
   declarations: [
     AppComponent,
     ChefListComponent,
     HeaderComponent,
     ChefProfileComponent,
-    HomeComponent
+    HomeComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,
