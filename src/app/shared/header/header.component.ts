@@ -10,7 +10,6 @@ export class HeaderComponent {
 
   constructor(private router: Router) { }
 
-
   routeToHome(): void {
     this.router.navigate(['home']);
   }

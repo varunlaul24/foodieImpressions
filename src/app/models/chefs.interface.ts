@@ -1,5 +1,22 @@
+export interface RandomUserApiResponse {
+    results: RandomUser[];
+}
+
+export interface RandomUser {
+    id: {
+      value: string;
+    };
+    name: {
+      first: string;
+      last: string;
+    };
+    picture: {
+      large: string;
+    };
+  }
+
 export interface Chef {
-    id: number;
+    id: string;
     name: string;
     avatar: string;
     reviews?: Review[];

@@ -7,7 +7,7 @@ import { Chef, Review } from 'src/app/models/chefs.interface';
 @Component({
   selector: 'app-chef-profile',
   templateUrl: './chef-profile.component.html',
-  styleUrls: ['./chef-profile.component.css']
+  styleUrls: ['./chef-profile.component.css'],
 })
 export class ChefProfileComponent implements OnInit {
   chef: Chef | null = null;
@@ -26,7 +26,7 @@ export class ChefProfileComponent implements OnInit {
       this.chefService.getChef(id).subscribe((data) => {
         this.chef = data;
         this.loadReviews();
-        this.summarizeReviews();
+        this.loadSummary();
       });
     }
   }
@@ -41,31 +41,45 @@ export class ChefProfileComponent implements OnInit {
   addReview(): void {
     if (this.chef) {
       const reviews = this.chef.reviews || [];
+      this.newReview.author = this.newReview.author.toUpperCase();
       this.newReview.date = new Date().toISOString();
       reviews.push({ ...this.newReview });
       this.chef.reviews = reviews;
-      localStorage.setItem(`chef-reviews-${this.chef.id}`, JSON.stringify(reviews));
+      localStorage.setItem(
+        `chef-reviews-${this.chef.id}`,
+        JSON.stringify(reviews)
+      );
       this.newReview = { author: '', content: '', date: '' };
+      this.summarizeReviews();
+    }
+  }
+
+  loadSummary(): void {
+    const storedSummary = localStorage.getItem(`chef-summary-${this.chef?.id}`);
+    if (storedSummary) {
+      this.summary = storedSummary;
+    } else {
       this.summarizeReviews();
     }
   }
 
   summarizeReviews(): void {
     if (this.chef?.reviews?.length) {
-      const reviewContents = this.chef.reviews.map(review => review.content).join(' ');
+      const reviewContents = this.chef.reviews
+        .map((review) => review.content)
+        .join(' ');
       const messages = [
-        { role: 'system', content: 'You are an AI review summarizer that summarizes customer reviews in less than 100 words to provide insights into the culinary experience offered by each chef on the CookinGenie platform' },
-        { role: 'user', content: reviewContents }
-      ];
-      
-      this.openAIService.getCompletion(messages).subscribe(
-        result => {
-          this.summary = result.choices[0].message.content;
+        {
+          role: 'system',
+          content:
+            'You are an AI review summarizer that summarizes customer reviews in less than 50 words to provide insights into the culinary experience offered by each chef on the CookinGenie platform',
         },
-        error => {
-          console.error('There was an error!', error);
-        }
-      );
+        { role: 'user', content: reviewContents },
+      ];
+      this.openAIService.getCompletion(messages).subscribe((result) => {
+        this.summary = result.choices[0].message.content;
+        localStorage.setItem(`chef-summary-${this.chef?.id}`, this.summary!);
+      });
     }
   }
 }
