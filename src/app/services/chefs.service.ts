@@ -29,7 +29,7 @@ export class ChefsService {
 
   private mapToChef(chef: RandomUser): Chef {
     return {
-      id: chef.id.value,
+      id: chef.login.uuid,
       name: `${chef.name.first} ${chef.name.last}`,
       avatar: chef.picture.large,
       reviews: [],

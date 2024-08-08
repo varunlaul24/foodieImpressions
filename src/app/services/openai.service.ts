@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs'; 
 import { environment } from 'src/environments/environment';
-import { OpenAIRequest, OpenAIResponse } from '../models/openai.interface';
+import { message, OpenAIRequest, OpenAIResponse } from '../models/openai.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -13,12 +13,9 @@ export class OpenAIService {
   private apiVersion = '2024-05-01-preview';
   private deployment = 'summariser';
 
-  constructor(private http: HttpClient) {
-  console.log('API URL:', this.apiUrl);
-  console.log('API Key:', this.apiKey);
-  }
+  constructor(private http: HttpClient) {}
 
-  getCompletion(messages: any[]): Observable<any> {
+  getCompletion(messages: message[]): Observable<any> {
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
       'api-key': `${this.apiKey}`
@@ -27,8 +24,8 @@ export class OpenAIService {
     const body: OpenAIRequest = {
       messages: messages,
       model: this.deployment,
-      max_tokens: 75,
-      temperature: 0.7,
+      max_tokens: 100,
+      temperature: 0.2,
     };
 
     return this.http.post<OpenAIResponse>(

@@ -3,8 +3,13 @@ export interface OpenAIResponse {
 }
 
 export interface OpenAIRequest {
-  messages: any[];
+  messages: message[];
   model: string;
   max_tokens: number;
   temperature: number;
+}
+
+export interface message{
+  content: string;
+  role: string;
 }

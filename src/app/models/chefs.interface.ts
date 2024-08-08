@@ -1,28 +1,31 @@
 export interface RandomUserApiResponse {
-    results: RandomUser[];
+  results: RandomUser[];
 }
 
 export interface RandomUser {
-    id: {
-      value: string;
-    };
-    name: {
-      first: string;
-      last: string;
-    };
-    picture: {
-      large: string;
-    };
-  }
+  login: {
+    uuid: string;
+  };
+  id: {
+    value: string;
+  };
+  name: {
+    first: string;
+    last: string;
+  };
+  picture: {
+    large: string;
+  };
+}
 
 export interface Chef {
-    id: string;
-    name: string;
-    avatar: string;
-    reviews?: Review[];
+  id: string;
+  name: string;
+  avatar: string;
+  reviews?: Review[];
 }
 export interface Review {
-    author: string;
-    content: string;
-    date: string;
+  author: string;
+  content: string;
+  date: string;
 }

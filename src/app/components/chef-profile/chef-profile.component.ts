@@ -64,15 +64,17 @@ export class ChefProfileComponent implements OnInit {
   }
 
   summarizeReviews(): void {
-    if (this.chef?.reviews?.length) {
+    if (this.chef && this.chef.reviews && this.chef.reviews.length >= 2) {
       const reviewContents = this.chef.reviews
-        .map((review) => review.content)
-        .join(' ');
+        .map((review, index) => `Review ${index + 1}: ${review.content}`)
+        .join(`\n`);
+      console.log(reviewContents);
       const messages = [
         {
           role: 'system',
-          content:
-            'You are an AI review summarizer that summarizes customer reviews in less than 50 words to provide insights into the culinary experience offered by each chef on the CookinGenie platform',
+          content: `You are an AI review summarizer. Provide a single summary in less than 75 words that highlights key takeaways from the culinary experience offered by the chef ${this.chef.name}`,
+          // "If you are unsure about all of the reviews, you can respond with 'No summary available.'"
+          // Few Shot Learning,
         },
         { role: 'user', content: reviewContents },
       ];

@@ -13,19 +13,18 @@
 
 <div *ngIf="chef" class="mt-32 p-4">
   <h2 class="text-2xl font-bold text-center pb-10">{{ chef.name }}</h2>
-  <div class="relative p-3">
+
+  <div class="relative p-3 border rounded-xl animate-border-anim">
     <div class="flex justify-between">
       <p class="text-xl font-semibold">Foodie Impressions</p>
       <small>Powered by Generative AI using recent customer reviews</small>
     </div>
     <p *ngIf="summary" class="pt-2">{{ summary }}</p>
     <p *ngIf="!summary" class="pt-2">No summary available.</p>
-    <div
-      class="absolute inset-0 border rounded-xl border-transparent animate-border-anim"
-    ></div>
   </div>
 
   <h3 class="text-xl font-semibold pt-10">Customer Reviews</h3>
+  <div *ngIf="!chef.reviews?.length">No reviews yet</div>
   <div *ngIf="chef.reviews?.length">
     <div
       *ngFor="let review of chef.reviews"
@@ -39,9 +38,6 @@
       </div>
       <p>{{ review.content }}</p>
     </div>
-  </div>
-  <div *ngIf="!chef.reviews?.length">
-    <p>No reviews yet.</p>
   </div>
 
   <h4 class="text-xl font-semibold pt-10">Add a Review</h4>
