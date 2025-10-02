@@ -3,9 +3,10 @@ import { ChefsService } from 'src/app/services/chefs.service';
 import { Chef } from '../../models/chefs.interface';
 
 @Component({
-  selector: 'app-chef-list',
-  templateUrl: './chef-list.component.html',
-  styleUrls: ['./chef-list.component.css']
+    selector: 'app-chef-list',
+    templateUrl: './chef-list.component.html',
+    styleUrls: ['./chef-list.component.css'],
+    standalone: false
 })
 export class ChefListComponent {
 

@@ -5,9 +5,10 @@ import { OpenAIService } from 'src/app/services/openai.service';
 import { Chef, Review } from 'src/app/models/chefs.interface';
 
 @Component({
-  selector: 'app-chef-profile',
-  templateUrl: './chef-profile.component.html',
-  styleUrls: ['./chef-profile.component.css'],
+    selector: 'app-chef-profile',
+    templateUrl: './chef-profile.component.html',
+    styleUrls: ['./chef-profile.component.css'],
+    standalone: false
 })
 export class ChefProfileComponent implements OnInit {
   chef: Chef | null = null;
