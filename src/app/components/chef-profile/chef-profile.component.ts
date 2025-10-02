@@ -3,14 +3,14 @@ import { ActivatedRoute } from '@angular/router';
 import { ChefsService } from 'src/app/services/chefs.service';
 import { OpenAIService } from 'src/app/services/openai.service';
 import { Chef, Review } from 'src/app/models/chefs.interface';
-import { NgIf, NgFor, DatePipe } from '@angular/common';
+import { DatePipe } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
 @Component({
     selector: 'app-chef-profile',
     templateUrl: './chef-profile.component.html',
     styleUrls: ['./chef-profile.component.css'],
-    imports: [NgIf, NgFor, FormsModule, DatePipe]
+    imports: [FormsModule, DatePipe]
 })
 export class ChefProfileComponent implements OnInit {
   chef: Chef | null = null;
