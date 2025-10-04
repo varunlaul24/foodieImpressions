@@ -1,18 +1,25 @@
-<header class="flex justify-between items-center p-4 border-b border-gray-900 bg-white sticky inset-0 z-50">
-    <div class="flex items-center">
-      <button
-        class="logo"
-        (click)="routeToHome()"
-      >
+<header
+  class="flex justify-between items-center p-4 border-b border-gray-900 bg-white sticky inset-0 z-50"
+>
+  <div class="flex items-center">
+    <div class="flex items-center me-8">
+      <button class="logo" (click)="routeToHome()">
         <img
           src="./../../../assets/logo.png"
           alt="App Logo"
-          class="h-10 w-40 ml-10"
+          class="h-10 w-40 ms-10"
         />
       </button>
     </div>
-    <a class="flex items-center mr-14 text-xl text-gray-500 font-thin" [routerLink]="['./chefs']">
+    <a
+      class="flex items-center mr-14 text-xl text-gray-500 font-thin"
+      [routerLink]="['./chefs']"
+    >
       Explore Chefs
     </a>
-  </header>
-  
+  </div>
+  <div class="flex items-center">
+    <img src="../../../assets/github.svg" alt="GitHub" class="me-2">
+    <a class="me-10 text-xl text-gray-500 font-thin" href="https://github.com/varunlaul24/foodieImpressions">Source Code</a>
+  </div>
+</header>
