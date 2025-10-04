@@ -75,9 +75,7 @@ export class ChefProfileComponent implements OnInit {
       const messages = [
         {
           role: 'system',
-          content: `You are an AI review summarizer. Provide a single summary in less than 75 words that highlights key takeaways from the culinary experience offered by the chef ${this.chef.name}`,
-          // "If you are unsure about all of the reviews, you can respond with 'No summary available.'"
-          // Few Shot Learning,
+          content: `You are an AI review summarizer. Provide a single summary in less than 75 words that highlights key takeaways from the culinary experience offered by the chef ${this.chef.name}`
         },
         { role: 'user', content: reviewContents },
       ];
