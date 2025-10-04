@@ -1,0 +1,23 @@
+# Node
+node_modules/
+npm-debug.log
+yarn-error.log
+
+# Build output (served static files)
+public/
+public/browser/
+# if you keep only browser inside public, keep the specific path instead:
+# public/browser/
+
+# Environment
+.env
+.env.local
+.env.*.local
+
+# Logs
+logs/
+*.log
+
+# System files
+.DS_Store
+Thumbs.db
