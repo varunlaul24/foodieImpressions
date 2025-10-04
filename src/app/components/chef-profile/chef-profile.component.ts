@@ -82,7 +82,7 @@ export class ChefProfileComponent implements OnInit {
         { role: 'user', content: reviewContents },
       ];
       this.openAIService.getCompletion(messages).subscribe((result) => {
-        this.summary = result.choices[0].message.content;
+        this.summary = typeof result === 'string' ? result.trim() : '';
         localStorage.setItem(`chef-summary-${this.chef?.id}`, this.summary!);
       });
     }

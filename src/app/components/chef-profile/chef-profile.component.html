@@ -12,17 +12,20 @@
 </div>
 
 @if (chef) {
-  <div class="mt-32 p-4">
+  <div class="mt-32 px-4 sm:px-8 md:px-16 lg:px-32 xl:px-72 py-4 min-w-0">
     <h2 class="text-2xl font-bold text-center pb-10">{{ chef.name }}</h2>
-    <div class="relative p-3 border rounded-xl animate-border-anim">
-      <div class="flex justify-between">
+    <div class="relative p-3 border rounded-xl animate-border-anim min-w-80">
+      <div class="flex justify-between items-center">
         <p class="text-xl font-semibold">Foodie Impressions</p>
         <small>Powered by Generative AI using recent customer reviews</small>
       </div>
       @if (summary) {
         <p class="pt-2">{{ summary }}</p>
       }
-      @if (!summary) {
+      @if (chef && chef.reviews && chef.reviews.length < 2) {
+         <p class="pt-2">At least two reviews are required to generate an AI summary.</p>
+      }
+      @if (chef && chef.reviews && chef.reviews.length >=2 && !summary) {
         <p class="pt-2">No summary available.</p>
       }
     </div>
@@ -31,16 +34,16 @@
       <div>No reviews yet</div>
     }
     @if (chef.reviews?.length) {
-      <div>
+      <div class="min-w-80">
         @for (review of chef.reviews; track review) {
           <div
-            class="review p-3 rounded-lg my-2 shadow border border-zinc-50"
+            class="review p-2 sm:p-3 rounded-lg my-2 shadow border border-zinc-50"
             >
             <div class="font-semibold flex justify-between">
               <div>
                 {{ review.author }}
               </div>
-              <div>({{ review.date | date : "medium" }})</div>
+              <div>{{ review.date | date : "medium" }}</div>
             </div>
             <p>{{ review.content }}</p>
           </div>
@@ -48,7 +51,7 @@
       </div>
     }
     <h4 class="text-xl font-semibold pt-10">Add a Review</h4>
-    <div class="pt-3">
+    <div class="pt-3 min-w-80">
       <input
         type="text"
         [(ngModel)]="newReview.author"

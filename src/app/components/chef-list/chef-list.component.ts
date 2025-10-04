@@ -7,7 +7,6 @@ import { RouterLink } from '@angular/router';
 @Component({
     selector: 'app-chef-list',
     templateUrl: './chef-list.component.html',
-    styleUrls: ['./chef-list.component.css'],
     imports: [RouterLink]
 })
 export class ChefListComponent {

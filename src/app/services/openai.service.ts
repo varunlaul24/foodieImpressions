@@ -1,37 +1,29 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable } from 'rxjs'; 
-import { environment } from 'src/environments/environment';
-import { message, OpenAIRequest, OpenAIResponse } from '../models/openai.interface';
+import { Observable, map } from 'rxjs';
+import { ContentItem, FoundryApiRequest, FoundryApiResponse, message, OutputItem } from '../models/openai.interface';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable({ providedIn: 'root' })
 export class OpenAIService {
-  private apiUrl = environment.azureOpenAiEndpoint;
-  private apiKey = environment.azureOpenAiApiKey;
-  private apiVersion = '2024-05-01-preview';
-  private deployment = 'summariser';
+  private proxyUrl = '/api/ai/responses';
 
   constructor(private http: HttpClient) {}
 
-  getCompletion(messages: message[]): Observable<any> {
-    const headers = new HttpHeaders({
-      'Content-Type': 'application/json',
-      'api-key': `${this.apiKey}`
+  getCompletion(messages: message[]): Observable<string> {
+    const body: FoundryApiRequest = { input: messages, model: 'gpt-5-mini', max_output_tokens: 500 };
+    return this.http.post<any>(this.proxyUrl, body).pipe(map(res => this.parseResponseToText(res)));
+  }
+
+  private parseResponseToText(res: FoundryApiResponse): string {
+    if (!res?.output || !Array.isArray(res.output)) return '';
+    const messageOutputs = res.output.filter((o: OutputItem) => o.type === 'message');
+    const texts = messageOutputs.map((msg: OutputItem) => {
+      if (!Array.isArray(msg.content)) return '';
+      return msg.content
+        .filter((c: ContentItem) => c.type === 'output_text' && typeof c.text === 'string')
+        .map((c: ContentItem) => c.text)
+        .join('');
     });
-
-    const body: OpenAIRequest = {
-      messages: messages,
-      model: this.deployment,
-      max_tokens: 100,
-      temperature: 0.2,
-    };
-
-    return this.http.post<OpenAIResponse>(
-      `${this.apiUrl}/openai/deployments/${this.deployment}/chat/completions?api-version=${this.apiVersion}`, 
-      body, 
-      { headers }
-    )
+    return texts.join('\n').trim();
   }
 }
